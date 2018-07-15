@@ -27,8 +27,12 @@ export default {
     };
   },
   mounted() {
+    document.addEventListener("scroll", this.onScrollHandle);
     this.$route.query.tab && (this.topicsParams.tab = this.$route.query.tab);
     this.getTopics();
+  },
+  beforeDestroyed() {
+    document.removeEventListener("scroll", this.onScrollHandle);
   },
   methods: {
     getTopics() {
@@ -38,21 +42,44 @@ export default {
         })
         .then(_ => {
           this.topics = this.topics.concat(_.data.data);
-          console.log(_.data.data);
         });
+    },
+    onScrollHandle(event) {
+      const clientHeight = event.target.documentElement.clientHeight;
+      const scrollHeight = event.target.documentElement.scrollHeight;
+      const scrollTop = event.target.documentElement.scrollTop;
+      if (scrollTop + clientHeight === scrollHeight) {
+        this.topicsParams.page += 1;
+        this.getTopics();
+      }
     }
   },
   watch: {
     $route(to, from) {
-      console.log(from, "\n", to);
+      if (to.query.tab) {
+        this.topicsParams = {
+          ...this.topicsParams,
+          tab: to.query.tab,
+          page: 1
+        };
+        this.topics = [];
+        this.getTopics();
+      }
+      if (to.fullPath === "/") {
+        this.topicsParams = {
+          ...this.topicsParams,
+          tab: "all",
+          page: 1
+        };
+        this.topics = [];
+        this.getTopics();
+      }
     }
   }
 };
 </script>
 <style scoped>
-#post {
-  padding: 0.1em 0;
-}
+
 #post li {
   list-style: none;
   border-bottom: 1px solid #d5dbdb;

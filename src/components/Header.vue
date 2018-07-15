@@ -5,13 +5,16 @@
         <span class="tab-title">title</span>
     </header>
     <div id="header">
-        <a id="logo" href="/">
+        <router-link id="logo" :to="{path:'/'}">
             <img src="../assets/logo.png"/>
-        </a>
+        </router-link>
         <span>Vue-CNode</span>
         <ul id="nav">
             <li v-for="tab in tabs" :key="tab.tab">
-                <router-link class="nav-link" :to="{path:'/',query: {tab:tab.tab}}">{{tab.name}}</router-link>
+                <router-link :class="getAvtiveTab(tab.tab) ? 'active':''" exact :to="{path:'./',query: {tab:tab.tab}}">{{tab.name}}</router-link>
+            </li>
+            <li v-for="page in pages" :key="page.page">
+                <router-link class="nav-page" :to="{name:page.page}">{{page.name}}</router-link>
             </li>
         </ul>
     </div>
@@ -27,11 +30,22 @@ export default {
         { tab: "good", name: "精华" },
         { tab: "share", name: "分享" },
         { tab: "ask", name: "问答" },
-        { tab: "job", name: "招聘" },
-        { tab: "login", name: "登陆" },
-        { tab: "message", name: "消息" }
+        { tab: "job", name: "招聘" }
+      ],
+      pages: [
+        { page: "login", name: "登陆" },
+        { page: "message", name: "消息" }
       ]
     };
+  },
+  created() {},
+  methods: {
+    getAvtiveTab(_) {
+      if (this.$route.path === "/" && !this.$route.query.tab && _ === "all") {
+        return true;
+      }
+      return false;
+    }
   }
 };
 </script>
@@ -101,6 +115,11 @@ export default {
 }
 #nav li a {
   color: black;
+}
+#nav .router-link-exact-active,
+#nav .active {
+  border-bottom: 3px solid #42b983;
+  padding-bottom: 3px;
 }
 @media screen and (max-width: 900px) {
   #mobile-bar {

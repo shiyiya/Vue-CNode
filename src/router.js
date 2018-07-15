@@ -1,15 +1,18 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import Home from "./routes/Home";
 import Topic from "./routes/Topic";
+import Login from "./routes/Login";
+import Post from "./routes/Post";
+import Message from "./routes/Message";
 Vue.use(VueRouter);
 
 export default new VueRouter({
   routes: [
     {
       path: "/",
-      name: "Home",
-      component: Home
+      //redirect: "/?tab=all",
+      name: "post",
+      component: Post
     },
     {
       path: "/topic/:id",
@@ -17,9 +20,20 @@ export default new VueRouter({
       component: Topic
     },
     {
+      path: "/login",
+      name: "login",
+      component: Login,
+      //meta: { requireAuth: true }
+    },
+    {
+      path: "/message",
+      name: "message",
+      component: Message,
+      meta: { requireAuth: true }
+    },
+    {
       path: "*",
-      name: "Home",
-      component: Home
+      component: Post
     }
   ]
 });

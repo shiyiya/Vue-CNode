@@ -1,12 +1,17 @@
 <template>
   <div id="app">
+    <app-header></app-header>
     <router-view></router-view>
     </div>
 </template>
 
 <script>
+import AppHeader from "./components/Header";
 export default {
-  name: "app"
+  name: "app",
+  components: {
+    AppHeader
+  }
 };
 </script>
 
@@ -15,6 +20,6 @@ export default {
   font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  margin-top: 62px;
+  margin-top: 70px;
 }
 </style>
