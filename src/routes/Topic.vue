@@ -45,13 +45,7 @@ export default {
   margin: 0 auto;
   padding: 45px;
 }
-.tag span {
-  display: inline-block;
-  background-color: aqua;
-  padding: 0.1em 0.2em;
-  margin: 0 0.5em;
-  border-radius: 0.5em;
-}
+
 @media (max-width: 767px) {
   .markdown-body {
     padding: 15px;

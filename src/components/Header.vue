@@ -9,7 +9,7 @@
                 <router-link  @click.native="toggleAside()" :class="getAvtiveTab(tab.tab) ? 'active':''" exact :to="{path:'./',query: {tab:tab.tab}}">{{tab.name}}</router-link>
             </li>
             <li v-for="page in pages" :key="page.page">
-                <router-link  @click.native="toggleAside()" class="nav-page" :to="{name:page.page}">{{page.name}}</router-link>
+                <router-link v-show="page.show" @click.native="toggleAside()" class="nav-page" :to="{name:page.page}">{{page.name}}</router-link>
             </li>
           </ul>
         </aside>
@@ -45,9 +45,13 @@ export default {
         { tab: "job", name: "招聘" }
       ],
       pages: [
-        { page: "login", name: "登陆", show: this.login },
+        { page: "login", name: "登陆", show: !this.login },
         { page: "message", name: "消息" },
-        { page: "user", name: "个人中心", show: !this.login }
+        {
+          page: `/user/${localStorage.token || ""}`,
+          name: "个人中心",
+          show: this.login
+        }
       ]
     };
   },
