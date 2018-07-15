@@ -9,7 +9,7 @@
                 <router-link  @click.native="toggleAside()" :class="getAvtiveTab(tab.tab) ? 'active':''" exact :to="{path:'./',query: {tab:tab.tab}}">{{tab.name}}</router-link>
             </li>
             <li v-for="page in pages" :key="page.page">
-                <router-link v-show="page.show" @click.native="toggleAside()" class="nav-page" :to="{name:page.page}">{{page.name}}</router-link>
+                <router-link  @click.native="toggleAside()" class="nav-page" :to="{name:page.page}">{{page.name}}</router-link>
             </li>
           </ul>
         </aside>
@@ -24,7 +24,7 @@
                 <router-link :class="getAvtiveTab(tab.tab) ? 'active':''" exact :to="{path:'./',query: {tab:tab.tab}}">{{tab.name}}</router-link>
             </li>
             <li v-for="page in pages" :key="page.page">
-                <router-link v-show="page.show" class="nav-page" :to="{name:page.page}">{{page.name}}</router-link>
+                <router-link class="nav-page" :to="{path:page.page,params:{id:page.params}}">{{page.name}}</router-link>
             </li>
         </ul>
     </div>
@@ -36,7 +36,6 @@ export default {
   data() {
     return {
       aside: false,
-      login: false,
       tabs: [
         { tab: "all", name: "全部" },
         { tab: "good", name: "精华" },
@@ -45,21 +44,17 @@ export default {
         { tab: "job", name: "招聘" }
       ],
       pages: [
-        { page: "login", name: "登陆", show: !this.login },
         { page: "message", name: "消息" },
         {
-          page: `/user/${localStorage.token || ""}`,
+          page: "user",
+          params: `${localStorage.token || ""}`,
           name: "个人中心",
           show: this.login
         }
       ]
     };
   },
-  mounted() {
-    if (localStorage.token) {
-      this.login = !this.login;
-    }
-  },
+  mounted() {},
   methods: {
     getAvtiveTab(_) {
       if (this.$route.path === "/" && !this.$route.query.tab && _ === "all") {

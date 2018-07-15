@@ -10,13 +10,10 @@ Vue.use(message);
 //路由重定向
 router.beforeEach((to, from, next) => {
   if (to.matched.some(record => record.meta.requireAuth)) {
-    if (sessionStorage.getItem("access_token")) {
+    if (localStorage.getItem("token")) {
       next();
     } else {
-      next({
-        path: "/login",
-        query: { redirect: to.fullPath }
-      });
+      next({ path: "/login", query: { redirect: to.fullPath } });
     }
   } else {
     next();

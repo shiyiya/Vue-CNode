@@ -36,7 +36,8 @@ export default new VueRouter({
     {
       path: "/user/:id",
       name: "user",
-      component: User
+      component: User,
+      meta: { requireAuth: true }
     },
     {
       path: "*",
