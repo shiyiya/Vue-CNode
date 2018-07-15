@@ -1,8 +1,18 @@
 <template>
 <div>
-    <header id="mobile-bar">
-        <a class="menu-button"></a>
-        <span class="tab-title">title</span>
+    <header id="mobile-header">
+        <a class="menu-button" @click="toggleAside()"></a>
+        <span class="tab-title">{{this.$route.query.tab||this.$route.name}}</span>
+        <aside class="mobile-bar"  :class="{ show: aside }">
+          <ul>
+            <li v-for="tab in tabs" :key="tab.tab">
+                <router-link  @click.native="toggleAside()" :class="getAvtiveTab(tab.tab) ? 'active':''" exact :to="{path:'./',query: {tab:tab.tab}}">{{tab.name}}</router-link>
+            </li>
+            <li v-for="page in pages" :key="page.page">
+                <router-link  @click.native="toggleAside()" class="nav-page" :to="{name:page.page}">{{page.name}}</router-link>
+            </li>
+          </ul>
+        </aside>
     </header>
     <div id="header">
         <router-link id="logo" :to="{path:'/'}">
@@ -14,7 +24,7 @@
                 <router-link :class="getAvtiveTab(tab.tab) ? 'active':''" exact :to="{path:'./',query: {tab:tab.tab}}">{{tab.name}}</router-link>
             </li>
             <li v-for="page in pages" :key="page.page">
-                <router-link class="nav-page" :to="{name:page.page}">{{page.name}}</router-link>
+                <router-link v-show="page.show" class="nav-page" :to="{name:page.page}">{{page.name}}</router-link>
             </li>
         </ul>
     </div>
@@ -25,6 +35,8 @@ export default {
   //name: "header",
   data() {
     return {
+      aside: false,
+      login: false,
       tabs: [
         { tab: "all", name: "全部" },
         { tab: "good", name: "精华" },
@@ -33,24 +45,33 @@ export default {
         { tab: "job", name: "招聘" }
       ],
       pages: [
-        { page: "login", name: "登陆" },
-        { page: "message", name: "消息" }
+        { page: "login", name: "登陆", show: this.login },
+        { page: "message", name: "消息" },
+        { page: "user", name: "个人中心", show: !this.login }
       ]
     };
   },
-  created() {},
+  mounted() {
+    if (localStorage.token) {
+      this.login = !this.login;
+    }
+  },
   methods: {
     getAvtiveTab(_) {
       if (this.$route.path === "/" && !this.$route.query.tab && _ === "all") {
         return true;
       }
       return false;
+    },
+    getMobileHeaderTitle() {},
+    toggleAside() {
+      this.aside = !this.aside;
     }
   }
 };
 </script>
 <style scoped>
-#mobile-bar {
+#mobile-header {
   display: none;
   position: fixed;
   top: 0;
@@ -74,6 +95,34 @@ export default {
 }
 .tab-title {
   line-height: 40px;
+}
+.mobile-bar {
+  position: fixed;
+  display: none;
+  top: 42px;
+  left: 0;
+  width: 100%;
+}
+.mobile-bar ul {
+  padding: 0;
+  margin: 0;
+}
+.mobile-bar li {
+  background-color: #fff;
+  border-bottom: #42b983 2px solid;
+  color: #34495e;
+}
+.mobile-bar li a {
+  display: block;
+  width: 100%;
+  padding: 0.5em 0;
+  transition: background-color 0.2s ease;
+}
+.mobile-bar li a:hover {
+  background: #42b983;
+}
+.tab-title {
+  text-transform: uppercase;
 }
 #header {
   position: fixed;
@@ -121,8 +170,11 @@ export default {
   border-bottom: 3px solid #42b983;
   padding-bottom: 3px;
 }
+.show {
+  display: block;
+}
 @media screen and (max-width: 900px) {
-  #mobile-bar {
+  #mobile-header {
     display: block;
   }
   #header {

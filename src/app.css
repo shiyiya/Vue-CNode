@@ -1,3 +1,154 @@
+html,
+body {
+  height: 100%;
+  border: 0;
+  font-family: "Helvetica-Neue", "Helvetica", Arial, sans-serif;
+  line-height: 1.5;
+  margin: 0;
+  padding: 0;
+}
+
+div,
+span,
+object,
+iframe,
+img,
+table,
+caption,
+thead,
+tbody,
+tfoot,
+tr,
+tr,
+td,
+article,
+aside,
+canvas,
+details,
+figure,
+hgroup,
+menu,
+nav,
+footer,
+header,
+section,
+summary,
+mark,
+audio,
+video {
+  border: 0;
+  margin: 0;
+  padding: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+address,
+cit,
+code,
+del,
+dfn,
+em,
+ins,
+q,
+samp,
+small,
+strong,
+sub,
+sup,
+b,
+i,
+hr,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+legend,
+label {
+  border: 0;
+  font-size: 100%;
+  vertical-align: baseline;
+  margin: 0;
+  padding: 0;
+}
+
+article,
+aside,
+canvas,
+figure,
+figure img,
+figcaption,
+hgroup,
+footer,
+header,
+nav,
+section,
+audio,
+video {
+  display: block;
+}
+
+table {
+  border-collapse: separate;
+  border-spacing: 0;
+}
+li {
+  list-style: none;
+}
 a {
   text-decoration: none;
+}
+a img {
+  border: 0;
+}
+
+:focus {
+  outline: 0;
+}
+* {
+  box-sizing: border-box;
+}
+textarea {
+  resize: none;
+  appearance: none;
+}
+input {
+  appearance: none;
+}
+select {
+  appearance: none;
+  background-color: #fff;
+}
+a {
+  text-decoration: none;
+  color: #34495e;
+}
+
+.avatar {
+  display: block;
+  width: 40px;
+  height: 40px;
+  margin-right: 15px;
+  border-radius: 50%;
+}
+/** message **/
+.message-info {
+  position: fixed;
+  top: 3em;
+  right: 1em;
+  background: #42b983;
+  padding: 0.2em 0.5em;
+  border-radius: 0.2em;
 }

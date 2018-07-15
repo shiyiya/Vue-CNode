@@ -4,6 +4,8 @@ import Topic from "./routes/Topic";
 import Login from "./routes/Login";
 import Post from "./routes/Post";
 import Message from "./routes/Message";
+import User from "./routes/User";
+
 Vue.use(VueRouter);
 
 export default new VueRouter({
@@ -22,7 +24,7 @@ export default new VueRouter({
     {
       path: "/login",
       name: "login",
-      component: Login,
+      component: Login
       //meta: { requireAuth: true }
     },
     {
@@ -30,6 +32,11 @@ export default new VueRouter({
       name: "message",
       component: Message,
       meta: { requireAuth: true }
+    },
+    {
+      path: "/user/:id",
+      name: "user",
+      component: User
     },
     {
       path: "*",
