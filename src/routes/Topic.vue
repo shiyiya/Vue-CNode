@@ -1,20 +1,20 @@
 <template>
-      <article class="topic markdown-body">
-        <h2 class="topic-title" v-text="topic.title"></h2>
-        <ul class="topic-meta">
-          <router-link :to="{name:'user',params:{id:topic.author_id}}" >
-            {{topic.author.loginname}}
-            </router-link>
-          <li v-text="topic.create_at"/>
-          <li>浏览量：{{topic.visit_count}}</li>
-          <li>分类：{{topic.tab}}</li>
-          <li class="tag">
-            <span v-show="topic.good">good</span>
-            <span v-show="topic.top">top</span>
-          </li>
-        </ul>
-        <section v-html="topic.content" class="topic-content"/>
-      </article>
+  <article class="topic markdown-body">
+    <h2 class="topic-title" v-text="topic.title"></h2>
+    <ul class="topic-meta">
+      <router-link :to="{name:'user',params:{id:topic.author_id}}">
+        {{topic.author.loginname}}
+      </router-link>
+      <li v-text="topic.create_at" />
+      <li>浏览量：{{topic.visit_count}}</li>
+      <li>分类：{{topic.tab}}</li>
+      <li class="tag">
+        <span v-show="topic.good">good</span>
+        <span v-show="topic.top">top</span>
+      </li>
+    </ul>
+    <section v-html="topic.content" class="topic-content" />
+  </article>
 </template>
 
 <script>
@@ -29,6 +29,7 @@ export default {
     };
   },
   mounted() {
+    document.documentElement.scrollTo(0, 0);
     this.topicId = this.$route.params.id;
     axios.get(`https://cnodejs.org/api/v1/topic/${this.topicId}`).then(res => {
       this.topic = res.data.data;

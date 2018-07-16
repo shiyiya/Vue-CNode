@@ -1,34 +1,34 @@
 <template>
-<div>
+  <div>
     <header id="mobile-header">
-        <a class="menu-button" @click="toggleAside()"></a>
-        <span class="tab-title">{{this.$route.query.tab||this.$route.name}}</span>
-        <aside class="mobile-bar"  :class="{ show: aside }">
-          <ul>
-            <li v-for="tab in tabs" :key="tab.tab">
-                <router-link  @click.native="toggleAside()" :class="getAvtiveTab(tab.tab) ? 'active':''" exact :to="{path:'./',query: {tab:tab.tab}}">{{tab.name}}</router-link>
-            </li>
-            <li v-for="page in pages" :key="page.page">
-                <router-link  @click.native="toggleAside()" class="nav-page" :to="{name:page.page}">{{page.name}}</router-link>
-            </li>
-          </ul>
-        </aside>
+      <a class="menu-button" @click="toggleAside()"></a>
+      <span class="tab-title">{{this.$route.query.tab||this.$route.name}}</span>
+      <aside class="mobile-bar" :class="{ show: aside }">
+        <ul>
+          <li v-for="tab in tabs" :key="tab.tab">
+            <router-link @click.native="toggleAside()" :class="getAvtiveTab(tab.tab) ? 'active':''" exact :to="{path:'/',query: {tab:tab.tab}}">{{tab.name}}</router-link>
+          </li>
+          <li v-for="page in pages" :key="page.page">
+            <router-link @click.native="toggleAside()" class="nav-page" :to="`${page.page}/${page.params}`">{{page.name}}</router-link>
+          </li>
+        </ul>
+      </aside>
     </header>
     <div id="header">
-        <router-link id="logo" :to="{path:'/'}">
-            <img src="../assets/logo.png"/>
-        </router-link>
-        <span>Vue-CNode</span>
-        <ul id="nav">
-            <li v-for="tab in tabs" :key="tab.tab">
-                <router-link :class="getAvtiveTab(tab.tab) ? 'active':''" exact :to="{path:'./',query: {tab:tab.tab}}">{{tab.name}}</router-link>
-            </li>
-            <li v-for="page in pages" :key="page.page">
-                <router-link class="nav-page" :to="{path:page.page,params:{id:page.params}}">{{page.name}}</router-link>
-            </li>
-        </ul>
+      <router-link id="logo" :to="{path:'/'}">
+        <img src="../assets/logo.png" />
+      </router-link>
+      <span>Vue-CNode</span>
+      <ul id="nav">
+        <li v-for="tab in tabs" :key="tab.tab">
+          <router-link :class="getAvtiveTab(tab.tab) ? 'active':''" exact :to="{path:'/',query: {tab:tab.tab}}">{{tab.name}}</router-link>
+        </li>
+        <li v-for="page in pages" :key="page.page">
+          <router-link class="nav-page" :to="{path:`${page.page}/${page.params}`}">{{page.name}}</router-link>
+        </li>
+      </ul>
     </div>
-</div>
+  </div>
 </template>
 <script>
 export default {
@@ -44,12 +44,11 @@ export default {
         { tab: "job", name: "招聘" }
       ],
       pages: [
-        { page: "message", name: "消息" },
+        { page: "/message", name: "消息", params: "" },
         {
-          page: "user",
-          params: `${localStorage.token || ""}`,
-          name: "个人中心",
-          show: this.login
+          page: "/user",
+          params: `${JSON.parse(localStorage.userInfo).loginname || ""}`,
+          name: "个人中心"
         }
       ]
     };
@@ -76,14 +75,15 @@ export default {
   top: 0;
   left: 0;
   width: 100%;
-  height: 40px;
+  height: 62px;
   background-color: #fff;
   box-shadow: 0 0 2px rgba(0, 0, 0, 0.25);
   text-align: center;
+  z-index: 999;
 }
 .menu-button {
   width: 40px;
-  height: 40px;
+  height: 62px;
   position: absolute;
   left: 0;
   top: 0;
@@ -93,14 +93,15 @@ export default {
   background-position: 50%;
 }
 .tab-title {
-  line-height: 40px;
+  line-height: 62px;
 }
 .mobile-bar {
   position: fixed;
   display: none;
-  top: 42px;
+  top: 62px;
   left: 0;
   width: 100%;
+  z-index: 999;
 }
 .mobile-bar ul {
   padding: 0;
@@ -131,6 +132,7 @@ export default {
   padding: 10px 60px;
   box-shadow: 0 0 1px rgba(0, 0, 0, 0.25);
   background-color: #fff;
+  z-index: 999;
 }
 #logo {
   display: inline-block;

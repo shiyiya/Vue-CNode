@@ -1,8 +1,8 @@
 <template>
-    <div id="login-page">
-        <input type="text" placeholder="在此填入你的Access Token" v-model="token" maxlength="36" required />
-        <input @click="login" type="button" value="登陆"/>
-    </div>
+  <div id="login-page">
+    <input type="text" placeholder="在此填入你的Access Token" v-model="token" maxlength="36" required />
+    <input @click="login" type="button" value="登陆" />
+  </div>
 </template>
 <script>
 import axios from "axios";
@@ -26,6 +26,13 @@ export default {
         .then(res => {
           if (res.data.success) {
             localStorage.token = this.token;
+            let userInfo = {
+              avatar_url: res.data.avatar_url,
+              loginname: res.data.loginname,
+              token: res.data.id
+            };
+            localStorage.userInfo = JSON.stringify(userInfo);
+            //console.log(res.data);
             this.$message("登陆成功~");
             let redirect = this.$route.query.redirect || "/";
             this.$router.push({
@@ -33,7 +40,7 @@ export default {
             });
           }
         })
-        .catch(error => {
+        .catch(() => {
           this.$message("请检查你的token是否正确");
         });
     }
