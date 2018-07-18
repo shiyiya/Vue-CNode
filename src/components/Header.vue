@@ -1,15 +1,15 @@
 <template>
   <div>
     <header id="mobile-header">
-      <a class="menu-button" @click="toggleAside()"></a>
+      <a class="menu-button" @click="toggleAside"></a>
       <span class="tab-title">{{this.$route.query.tab||this.$route.name}}</span>
       <aside class="mobile-bar" :class="{ show: aside }">
         <ul>
-          <li v-for="tab in tabs" :key="tab.tab">
-            <router-link @click.native="toggleAside()" :class="getAvtiveTab(tab.tab) ? 'active':''" exact :to="{path:'/',query: {tab:tab.tab}}">{{tab.name}}</router-link>
+          <li v-for="tab of tabs" :key="tab.tab">
+            <router-link @click.native="toggleAside" :class="getAvtiveTab(tab.tab) ? 'active':''" exact :to="{path:'/',query: {tab:tab.tab}}">{{tab.name}}</router-link>
           </li>
-          <li v-for="page in pages" :key="page.page">
-            <router-link @click.native="toggleAside()" class="nav-page" :to="`${page.page}/${page.params}`">{{page.name}}</router-link>
+          <li v-for="page of pages" :key="page.page">
+            <router-link @click.native="toggleAside" class="nav-page" :to="`${page.page}/${page.params}`">{{page.name}}</router-link>
           </li>
         </ul>
       </aside>
@@ -20,10 +20,10 @@
       </router-link>
       <span>Vue-CNode</span>
       <ul id="nav">
-        <li v-for="tab in tabs" :key="tab.tab">
+        <li v-for="tab of tabs" :key="tab.tab">
           <router-link :class="getAvtiveTab(tab.tab) ? 'active':''" exact :to="{path:'/',query: {tab:tab.tab}}">{{tab.name}}</router-link>
         </li>
-        <li v-for="page in pages" :key="page.page">
+        <li v-for="page of pages" :key="page.page">
           <router-link class="nav-page" :to="{path:`${page.page}/${page.params}`}">{{page.name}}</router-link>
         </li>
       </ul>
@@ -64,6 +64,10 @@ export default {
     getMobileHeaderTitle() {},
     toggleAside() {
       this.aside = !this.aside;
+      /*  console.log(this.tabs);
+      for (tab of this.tabs) {
+        console.log(tab.tab);
+      } */
     }
   }
 };
