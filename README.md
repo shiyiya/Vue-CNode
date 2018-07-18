@@ -10,6 +10,16 @@
 - × 回复别人的回复
 - × ....
 
+## note
+```javascript
+- error："TypeError: Object doesn't support property or method 'scrollTo'"
+- error-code：document.documentElement.scrollTo(0,0)
+- fix：`edge` 不支持 `DOM scrollTo`
+
+- error：ios 下拉刷新
+- fix：`document.documentElement.scrollTop` => `document.body.scrollTop`
+```
+
 ## Project setup
 
 ```

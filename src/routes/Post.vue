@@ -25,7 +25,7 @@ export default {
     };
   },
   mounted() {
-    document.documentElement.scrollTo(0, 0);
+    window.scrollTo(0, 0);
     document.addEventListener("scroll", this.onScrollHandle);
     this.$route.query.tab && (this.topicsParams.tab = this.$route.query.tab);
     this.getTopics();
@@ -56,18 +56,29 @@ export default {
         });
     },
     onScrollHandle(event) {
-      const clientHeight = event.target.documentElement.clientHeight;
-      const scrollHeight = event.target.documentElement.scrollHeight;
-      const scrollTop = event.target.documentElement.scrollTop;
-      if (scrollTop + clientHeight === scrollHeight) {
-        this.topicsParams.page += 1;
-        this.getTopics();
+      if (document.body.scrollTop) {
+        // safari
+        const clientHeight = event.target.body.clientHeight;
+        const scrollHeight = event.target.body.scrollHeight;
+        const scrollTop = event.target.body.scrollTop;
+        if (scrollTop + clientHeight === scrollHeight) {
+          this.topicsParams.page += 1;
+          this.getTopics();
+        }
+      } else {
+        const clientHeight = event.target.documentElement.clientHeight;
+        const scrollHeight = event.target.documentElement.scrollHeight;
+        const scrollTop = event.target.documentElement.scrollTop;
+        if (scrollTop + clientHeight === scrollHeight) {
+          this.topicsParams.page += 1;
+          this.getTopics();
+        }
       }
     }
   },
   watch: {
     $route(to) {
-      document.documentElement.scrollTo(0, 0);
+      window.scrollTo(0, 0);
       if (to.query.tab) {
         this.topicsParams = {
           ...this.topicsParams,

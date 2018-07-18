@@ -51,7 +51,7 @@ export default {
   },
   mounted() {
     this.isLoading = true;
-    document.documentElement.scrollTo(0, 0);
+    window.scrollTo(0, 0);
     this.topicId = this.$route.params.id;
     axios
       .get(`https://cnodejs.org/api/v1/topic/${this.topicId}`)
