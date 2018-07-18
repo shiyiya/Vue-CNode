@@ -26,12 +26,13 @@ export default {
         .then(res => {
           if (res.data.success) {
             localStorage.token = this.token;
-            let userInfo = {
+            localStorage.loginname = res.data.loginname;
+            /* let userInfo = {
               avatar_url: res.data.avatar_url,
               loginname: res.data.loginname,
-              token: res.data.id
+              id: res.data.id
             };
-            localStorage.userInfo = JSON.stringify(userInfo);
+            localStorage.userInfo = JSON.stringify(userInfo); */
             //console.log(res.data);
             this.$message("登陆成功~");
             let redirect = this.$route.query.redirect || "/";

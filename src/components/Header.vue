@@ -47,7 +47,7 @@ export default {
         { page: "/message", name: "消息", params: "" },
         {
           page: "/user",
-          params: `${JSON.parse(localStorage.userInfo).loginname || ""}`,
+          params: localStorage.loginname || "",
           name: "个人中心"
         }
       ]
