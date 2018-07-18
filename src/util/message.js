@@ -15,7 +15,7 @@ export default {
       clearTimeout(timer);
       timer = setTimeout(() => {
         div.parentElement.removeChild(div);
-      }, 1000);
+      }, 2000);
     };
   }
 };

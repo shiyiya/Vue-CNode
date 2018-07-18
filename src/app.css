@@ -151,4 +151,13 @@ a {
   background: #42b983;
   padding: 0.2em 0.5em;
   border-radius: 0.2em;
+  animation: message 2s 0s ease-in-out;
+}
+@keyframes message{
+  from{
+    transform: translateX(100%)
+  }
+  to{
+    transform: translateX(0)
+  }
 }
