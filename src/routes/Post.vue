@@ -1,17 +1,20 @@
 <template>
   <div id="post">
     <li v-for="topic in topics" :key="topic.id">
-      <list :data="topic"></list>
+      <list :data="topic" listType="post"></list>
     </li>
+    <loading v-if="isLoading"></loading>
   </div>
 </template>
 <script>
 import axios from "axios";
 import List from "../components/List";
+import Loading from "../components/Loading";
 export default {
   name: "post",
   data() {
     return {
+      isLoading: true,
       topics: [],
       topicsParams: {
         tab: "all",
@@ -29,19 +32,27 @@ export default {
   },
   beforeDestroyed() {
     document.removeEventListener("scroll", this.onScrollHandle);
+    console.log("leave");
   },
   beforeRouteLeave(to, from, next) {
     document.removeEventListener("scroll", this.onScrollHandle);
+    console.log("leave");
     next();
+  },
+  destroyed() {
+    console.log("leave");
   },
   methods: {
     getTopics() {
+      this.$message("加载中");
+      this.isLoading = true;
       axios
         .get("https://cnodejs.org/api/v1/topics", {
           params: this.topicsParams
         })
         .then(_ => {
           this.topics = this.topics.concat(_.data.data);
+          this.isLoading = false;
         });
     },
     onScrollHandle(event) {
@@ -78,7 +89,8 @@ export default {
     }
   },
   components: {
-    List
+    List,
+    Loading
   }
 };
 </script>

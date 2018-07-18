@@ -78,7 +78,6 @@ fieldset,
 legend,
 label {
   border: 0;
-  font-size: 100%;
   vertical-align: baseline;
   margin: 0;
   padding: 0;
@@ -147,7 +146,7 @@ a {
 /** message **/
 .message-info {
   position: fixed;
-  top: 3em;
+  top: 5em;
   right: 1em;
   background: #42b983;
   padding: 0.2em 0.5em;

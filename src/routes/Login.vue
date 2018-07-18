@@ -15,7 +15,7 @@ export default {
   },
   methods: {
     login() {
-      if (this.token === "" || this.token.length < 36) {
+      if (this.token === "" && this.token.length < 36) {
         this.$message("请检查你的token是否正确");
         return false;
       }

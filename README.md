@@ -1,4 +1,12 @@
 # Vue-Cnode
+[在线地址](http://vuecnode.runtua.cn/)  
+
+# TodoList
+- √ 回复
+- √ 登陆
+- × 发表
+- × 回复别人的回复
+- × ....
 
 ## Project setup
 
