@@ -144,20 +144,22 @@ a {
   color: black;
 }
 /** message **/
-.message-info {
+#message-info {
   position: fixed;
   top: 5em;
-  right: 1em;
+  right: 0;
   background: #42b983;
   padding: 0.2em 0.5em;
   border-radius: 0.2em;
-  animation: message 2s 0s ease-in-out;
+  animation: message .8s 0s ease-in-out; 
+ 
 }
-@keyframes message{
+
+ @keyframes message{
   from{
-    transform: translateX(100%)
+   transform: translateX(100%);
   }
   to{
-    transform: translateX(0)
+    transform: translateX(0);
   }
-}
+} 

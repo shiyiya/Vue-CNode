@@ -4,6 +4,7 @@
         <a href="https://github.com/shiyiya/Vue-CNode/issues" target="_blank">
             <h3>Found Bug & Tell me</h3>
         </a>
+        <h1>你来到了未知的国度 --- 404-NOT-FOund</h1>
     </article>
 </template>
 
@@ -15,7 +16,9 @@ export default {
     
 <style>
 #about {
+      line-height: 4;
   text-align: center;
+  padding-top: 4em;
 }
 #about h3 {
   color: red;

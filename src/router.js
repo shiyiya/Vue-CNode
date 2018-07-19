@@ -26,7 +26,6 @@ export default new VueRouter({
       path: "/login",
       name: "login",
       component: Login
-      //meta: { requireAuth: true }
     },
     {
       path: "/message",
@@ -43,11 +42,12 @@ export default new VueRouter({
     {
       path: "/user",
       name: "about",
-      component: About
+      component: About,
+      meta: { requireAuth: true }
     },
     {
       path: "*",
-      component: Post
+      component: About
     }
   ]
 });

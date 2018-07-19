@@ -4,12 +4,12 @@ export default {
   install() {
     let timer = null;
     Vue.prototype.$message = msg => {
-      let old = document.getElementsByClassName("message-info")[0];
+      let old = document.getElementById("message-info");
       if (old) {
         old.parentElement.removeChild(old);
       }
       let div = document.createElement("div");
-      div.className = "message-info";
+      div.id = "message-info";
       div.textContent = msg;
       document.body.appendChild(div);
       clearTimeout(timer);
