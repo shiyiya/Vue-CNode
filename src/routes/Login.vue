@@ -1,7 +1,7 @@
 <template>
   <div id="login-page">
     <input type="text" placeholder="在此填入你的Access Token" v-model="token" maxlength="36" required />
-    <input @click="login" type="button" value="登陆" />
+    <button @click="login" type="button">登陆</button>
   </div>
 </template>
 <script>
@@ -55,25 +55,13 @@ export default {
   overflow: auto;
   margin: auto;
 }
-#login-page input {
-  outline: 0;
-  border: none;
+#login-page input,
+button {
   display: block;
   margin: 2em auto;
 }
 #login-page input[type="text"] {
   width: 80%;
-  padding: 0.5em 0;
   text-align: center;
-  border-bottom: #42b983 2px solid;
-}
-#login-page input[type="button"] {
-  padding: 0.5em 2em;
-  border-radius: 1em;
-  background-color: #42b983ba;
-  transition: background-color 0.2s ease;
-}
-#login-page input[type="button"]:hover {
-  background-color: #42b983;
 }
 </style>

@@ -32,16 +32,12 @@ export default {
   },
   beforeDestroyed() {
     document.removeEventListener("scroll", this.onScrollHandle);
-    console.log("leave");
   },
   beforeRouteLeave(to, from, next) {
     document.removeEventListener("scroll", this.onScrollHandle);
-    console.log("leave");
     next();
   },
-  destroyed() {
-    console.log("leave");
-  },
+
   methods: {
     getTopics() {
       this.$message("加载中");
@@ -66,6 +62,7 @@ export default {
           this.getTopics();
         }
       } else {
+        //true
         const clientHeight = event.target.documentElement.clientHeight;
         const scrollHeight = event.target.documentElement.scrollHeight;
         const scrollTop = event.target.documentElement.scrollTop;

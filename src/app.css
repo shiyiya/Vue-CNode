@@ -151,7 +151,7 @@ a {
   background: #42b983;
   padding: 0.2em 0.5em;
   border-radius: 0.2em;
-  animation: message .8s 0s ease-in-out; 
+  animation: message .5s 0s ease-in-out; 
  
 }
 
@@ -163,3 +163,20 @@ a {
     transform: translateX(0);
   }
 } 
+button[type="button"] {
+  border-radius: 3px;
+  background-color: #42b983;
+  border: none;
+  padding: 0.5em 2em;
+  font-size: 14px;
+  color: #fff;
+  transition: background-color 0.2s ease;
+}
+button[type="button"]:hover{
+  background-color: #2a6d4f;
+}
+input[type="text"] {
+  padding: 0.5em 0;
+  border: none;
+  border-bottom: #42b983 2px solid;
+}

@@ -3,10 +3,12 @@
 
 ![home](./shot/home.png)
 ![topic](./shot/topic-m.png)![user](./shot/user-m.png)
+
 # TodoList
 - √ 回复
 - √ 登陆
-- × 发表
+- √ 发表
+- × 点赞
 - × 回复别人的回复
 - × ....
 

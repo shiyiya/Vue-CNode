@@ -49,7 +49,8 @@ export default {
           page: "/user",
           params: localStorage.loginname || "",
           name: "个人中心"
-        }
+        },
+        { page: "/newtopic", name: "发表", params: "" }
       ]
     };
   },
