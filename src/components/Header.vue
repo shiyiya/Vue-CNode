@@ -65,10 +65,6 @@ export default {
     getMobileHeaderTitle() {},
     toggleAside() {
       this.aside = !this.aside;
-      /*  console.log(this.tabs);
-      for (tab of this.tabs) {
-        console.log(tab.tab);
-      } */
     }
   }
 };
