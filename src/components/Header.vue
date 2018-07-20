@@ -26,6 +26,9 @@
         <li v-for="page of pages" :key="page.page">
           <router-link class="nav-page" :to="{path:`${page.page}/${page.params}`}">{{page.name}}</router-link>
         </li>
+        <li>
+          <router-link class="nav-page" :to="{path:this.$store.state.loginname?(user.page+'/'+this.$store.state.loginname):'/login'}">{{user.name}}</router-link>
+        </li>
       </ul>
     </div>
   </div>
@@ -45,13 +48,12 @@ export default {
       ],
       pages: [
         { page: "/message", name: "消息", params: "" },
-        {
-          page: "/user",
-          params: localStorage.loginname || "",
-          name: "个人中心"
-        },
         { page: "/newtopic", name: "发表", params: "" }
-      ]
+      ],
+      user: {
+        page: "/user",
+        name: "个人中心"
+      }
     };
   },
   mounted() {},

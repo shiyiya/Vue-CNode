@@ -13,10 +13,13 @@ export default {
       token: ""
     };
   },
+  mounted() {
+    this.$message("请登录！");
+  },
   methods: {
     login() {
-      if (this.token === "" && this.token.length < 36) {
-        this.$message("请检查你的token是否正确");
+      if (this.token === "" || this.token.length < 36) {
+        this.$message("请检查你的token");
         return false;
       }
       axios
@@ -27,13 +30,7 @@ export default {
           if (res.data.success) {
             localStorage.token = this.token;
             localStorage.loginname = res.data.loginname;
-            /* let userInfo = {
-              avatar_url: res.data.avatar_url,
-              loginname: res.data.loginname,
-              id: res.data.id
-            };
-            localStorage.userInfo = JSON.stringify(userInfo); */
-            //console.log(res.data);
+            this.$store.commit("setLoginname", res.data.loginname);
             this.$message("登陆成功~");
             let redirect = this.$route.query.redirect || "/";
             this.$router.push({

@@ -2,6 +2,7 @@ import Vue from "vue";
 import App from "./App.vue";
 import router from "./router";
 import message from "./util/message";
+import store from "./store/login";
 import "./app.css";
 
 Vue.config.productionTip = false;
@@ -23,5 +24,6 @@ router.beforeEach((to, from, next) => {
 new Vue({
   el: "#app",
   router,
+  store,
   render: h => h(App)
 });
