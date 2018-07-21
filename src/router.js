@@ -5,8 +5,8 @@ import Login from "./routes/Login";
 import Post from "./routes/Post";
 import Message from "./routes/Message";
 import User from "./routes/User";
-import About from './routes/About';
-import Newtopic from './routes/Newtopic';
+import Null from "./routes/Null";
+import Newtopic from "./routes/Newtopic";
 
 Vue.use(VueRouter);
 
@@ -41,11 +41,6 @@ export default new VueRouter({
       meta: { requireAuth: true }
     },
     {
-      path: "/user",
-      name: "about",
-      component: About,
-      meta: { requireAuth: true }
-    }, {
       path: "/newtopic",
       name: "newtopic",
       component: Newtopic,
@@ -53,7 +48,7 @@ export default new VueRouter({
     },
     {
       path: "*",
-      component: About
+      component: Null
     }
   ]
 });

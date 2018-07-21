@@ -1,23 +1,22 @@
 <template>
-    <div id="newtopic">
-        <input type="text" v-model="title" placeholder="标题 十字以上" />
-        <div id="select-auto">
-            <div id="select" @click="toggleshow">{{select||'请选择分类'}}</div>
-            <div id="selectList" v-if="tabshow">
-                <ul v-for="(tab,index) in tabs" :key="tab.tab">
-                    <li @click="setValue(tab.tab,index)">{{tab.name}}</li>
-                </ul>
-            </div>
-        </div>
-        <textarea v-model="content">
-
-        </textarea>
-        <button type="button" @click="poi">提 交</button>
+  <div id="newtopic">
+    <input type="text" v-model="title" placeholder="标题 十字以上" />
+    <div id="select-auto">
+      <div id="select" @click="toggleshow">{{select||'请选择分类'}}</div>
+      <div id="selectList" v-if="tabshow">
+        <ul v-for="(tab,index) in tabs" :key="tab.tab">
+          <li @click="setValue(tab.tab,index)">{{tab.name}}</li>
+        </ul>
+      </div>
     </div>
+    <textarea v-model="content" placeholder="*支持 Markdown 语法" />
+    <button type="button" @click="poi">提 交</button>
+  </div>
 </template>
 
 <script>
 import axios from "axios";
+import marked from "marked";
 export default {
   name: "newtopic",
   data() {
@@ -54,7 +53,7 @@ export default {
           accesstoken: localStorage.token,
           title: this.title,
           tab: this.select,
-          content: this.content
+          content: marked(this.content)
         })
         .then(_ => {
           if (_.success) {

@@ -8,7 +8,10 @@
           <li v-for="tab of tabs" :key="tab.tab">
             <router-link @click.native="toggleAside" :class="getAvtiveTab(tab.tab) ? 'active':''" exact :to="{path:'/',query: {tab:tab.tab}}">{{tab.name}}</router-link>
           </li>
-          <li v-for="page of pages" :key="page.page">
+          <li>
+            <router-link @click.native="toggleAside" class="nav-page" :to="{path:this.$store.state.loginname?(user.page+'/'+this.$store.state.loginname):'/login'}">{{user.name}}</router-link>
+          </li>
+          <li v-if="loginname" v-for="page of userpages" :key="page.page">
             <router-link @click.native="toggleAside" class="nav-page" :to="`${page.page}/${page.params}`">{{page.name}}</router-link>
           </li>
         </ul>
@@ -23,11 +26,11 @@
         <li v-for="tab of tabs" :key="tab.tab">
           <router-link :class="getAvtiveTab(tab.tab) ? 'active':''" exact :to="{path:'/',query: {tab:tab.tab}}">{{tab.name}}</router-link>
         </li>
-        <li v-for="page of pages" :key="page.page">
-          <router-link class="nav-page" :to="{path:`${page.page}/${page.params}`}">{{page.name}}</router-link>
-        </li>
         <li>
           <router-link class="nav-page" :to="{path:this.$store.state.loginname?(user.page+'/'+this.$store.state.loginname):'/login'}">{{user.name}}</router-link>
+        </li>
+        <li v-if="loginname" v-for="page of userpages" :key="page.page">
+          <router-link class="nav-page" :to="{path:`${page.page}/${page.params}`}">{{page.name}}</router-link>
         </li>
       </ul>
     </div>
@@ -39,6 +42,7 @@ export default {
   data() {
     return {
       aside: false,
+      loginname: "",
       tabs: [
         { tab: "all", name: "全部" },
         { tab: "good", name: "精华" },
@@ -46,17 +50,20 @@ export default {
         { tab: "ask", name: "问答" },
         { tab: "job", name: "招聘" }
       ],
-      pages: [
-        { page: "/message", name: "消息", params: "" },
-        { page: "/newtopic", name: "发表", params: "" }
-      ],
       user: {
         page: "/user",
         name: "个人中心"
-      }
+      },
+      userpages: [
+        { page: "/message", name: "消息", params: "" },
+        { page: "/newtopic", name: "发表", params: "" }
+      ]
     };
   },
-  mounted() {},
+  mounted() {
+    this.loginname = this.$store.state.loginname;
+    //template for 获取不到正确的 this
+  },
   methods: {
     getAvtiveTab(_) {
       if (this.$route.path === "/" && !this.$route.query.tab && _ === "all") {

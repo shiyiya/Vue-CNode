@@ -24,11 +24,9 @@
     </section>
     <div id="comment">
       <h2 class="repliy-title">回复主题</h2>
-      <textarea v-model="newReply">
-        11
-      </textarea>
+      <textarea v-model="newReply" />
       <br/>
-      <button @click="reply">回复</button>
+      <button type="button" @click="reply">回复</button>
     </div>
   </div>
 </template>
@@ -129,14 +127,5 @@ export default {
   width: 80%;
   resize: none;
   margin-top: 1em;
-}
-#comment > button {
-  background-color: #08c;
-  padding: 0.4em 1em;
-  color: #fff;
-  vertical-align: middle;
-  cursor: pointer;
-  border-radius: 3px;
-  border: none;
 }
 </style>

@@ -8,7 +8,10 @@ import "./app.css";
 Vue.config.productionTip = false;
 
 Vue.use(message);
-//路由重定向
+
+localStorage.getItem("loginname") &&
+  store.commit("setLoginname", localStorage.getItem("loginname"));
+
 router.beforeEach((to, from, next) => {
   if (to.matched.some(record => record.meta.requireAuth)) {
     if (localStorage.getItem("token")) {
