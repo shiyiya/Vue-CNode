@@ -1,12 +1,5 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import Topic from "./routes/Topic";
-import Login from "./routes/Login";
-import Post from "./routes/Post";
-import Message from "./routes/Message";
-import User from "./routes/User";
-import Null from "./routes/Null";
-import Newtopic from "./routes/Newtopic";
 
 Vue.use(VueRouter);
 
@@ -16,39 +9,39 @@ export default new VueRouter({
       path: "/",
       //redirect: "/?tab=all",
       name: "post",
-      component: Post
+      component: resolve => require(["./routes/Post"], resolve)
     },
     {
       path: "/topic/:id",
       name: "topic",
-      component: Topic
+      component: resolve => require(["./routes/Topic"], resolve)
     },
     {
       path: "/login",
       name: "login",
-      component: Login
+      component: resolve => require(["./routes/Login"], resolve)
     },
     {
       path: "/message",
       name: "message",
-      component: Message,
+      component: resolve => require(["./routes/Message"], resolve),
       meta: { requireAuth: true }
     },
     {
       path: "/user/:id",
       name: "user",
-      component: User,
+      component: resolve => require(["./routes/User"], resolve),
       meta: { requireAuth: true }
     },
     {
       path: "/newtopic",
       name: "newtopic",
-      component: Newtopic,
+      component: resolve => require(["./routes/Newtopic"], resolve),
       meta: { requireAuth: true }
     },
     {
       path: "*",
-      component: Null
+      component: resolve => require(["./routes/Null"], resolve)
     }
   ]
 });
