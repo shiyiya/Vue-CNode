@@ -11,15 +11,14 @@
     "axios": "^0.18.0",
     "github-markdown-css": "^2.10.0",
     "vue": "^2.5.16",
-    "vue-router": "^3.0.1"
+    "vue-router": "^3.0.1",
+    "vuex": "^3.0.1",
+    "marked": "^0.4.0"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.0.0-rc.4",
     "@vue/cli-plugin-eslint": "^3.0.0-rc.4",
     "@vue/cli-service": "^3.0.0-rc.4",
-    "marked": "^0.4.0",
-    "vue-template-compiler": "^2.5.16",
-    "vuex": "^3.0.1"
   },
   "eslintConfig": {
     "root": true,
