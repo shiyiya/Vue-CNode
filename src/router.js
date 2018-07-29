@@ -7,7 +7,6 @@ export default new VueRouter({
   routes: [
     {
       path: "/",
-      //redirect: "/?tab=all",
       name: "post",
       component: resolve => require(["./routes/Post"], resolve)
     },
@@ -30,8 +29,7 @@ export default new VueRouter({
     {
       path: "/user/:id",
       name: "user",
-      component: resolve => require(["./routes/User"], resolve),
-      meta: { requireAuth: true }
+      component: resolve => require(["./routes/User"], resolve)
     },
     {
       path: "/newtopic",

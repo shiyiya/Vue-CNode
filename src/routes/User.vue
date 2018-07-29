@@ -7,16 +7,17 @@
     </section>
     <section id="user-trends">
       <ul class="user-tab">
-        <li :class="{currentTab:currentTab==1}" @click="toogleTab(1)">最新回复</li>
-        <li :class="{currentTab:currentTab==2}" @click="toogleTab(2)">最新发布</li>
+        <!-- <li :class="{currentTab:currentTab==1}" @click="toogleTab(1)">最新回复</li>
+        <li :class="{currentTab:currentTab==2}" @click="toogleTab(2)">最新发布</li> -->
+          <li v-for="tab in tabs" :key="tab" :class="{ currentTab:currentTab === tab }" @click="currentTab = tab">{{tab}}</li>
       </ul>
-      <div :class="{currentContent:currentTab==1}" class="trends">
+      <div :class="{currentContent:currentTab==='recent_replies'}" class="trends">
         <article v-for="reply in user.recent_replies" :key="reply.id">
           <list :data="reply"></list>
         </article>
         <h2 v-if="user.recent_replies.length==0">暂无数据</h2>
       </div>
-      <div :class="{currentContent:currentTab==2} " class="trends">
+      <div :class="{currentContent:currentTab == 'recent_topics'}" class="trends">
         <article v-for="reply in user.recent_topics" :key="reply.id">
           <list :data="reply"></list>
         </article>
@@ -33,7 +34,8 @@ export default {
   data() {
     return {
       user: {},
-      currentTab: 1,
+      currentTab: 'recent_replies',
+      tabs:['recent_replies','recent_topics'],
       currentContent: ""
     };
   },
@@ -42,9 +44,9 @@ export default {
     this.getUserInfo();
   },
   methods: {
-    toogleTab(_) {
+    /* toogleTab(_) {
       this.currentTab = _;
-    },
+    }, */
     getUserInfo() {
       axios
         .get(`https://cnodejs.org/api/v1/user/${this.$route.params.id}`)

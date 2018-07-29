@@ -1,18 +1,33 @@
 # Vue-Cnode
-[在线地址](http://vuecnode.runtua.cn/)  
+
+[在线地址](http://vuecnode.runtua.cn/)
 
 ![home](./shot/home.png)
 ![topic](./shot/topic-m.png)![user](./shot/user-m.png)
 
 # TodoList
-- √ 回复
-- √ 登陆
-- √ 发表
-- × 点赞
-- × 回复别人的回复
-- × ....
+
+- [√] 主题首页
+- [√] 主题详情
+- [×] 编辑主题
+- [√] 新建主题
+- [√] 编辑主题
+- [×] 收藏主题
+- [×] 取消收藏主题
+- [×] 用户所收藏的主题
+- [√] 新建评论
+- [×] 为他人评论点赞
+- [×] 评论他人的评论
+- [√] 用户详情/个人主页
+- [√] 登录
+- [×] 获取未读消息数
+- [×] 获取已读和未读消息
+- [×] 标记全部已读
+- [×] 标记单个消息为已读
+- [×] ....
 
 ## note
+
 ```javascript
 - error："TypeError: Object doesn't support property or method 'scrollTo'"
 - error-code：document.documentElement.scrollTo(0,0)
