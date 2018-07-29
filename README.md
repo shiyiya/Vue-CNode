@@ -26,37 +26,24 @@
 - [×] 标记单个消息为已读
 - [×] ....
 
-## note
+## Note
 
-```javascript
 - error："TypeError: Object doesn't support property or method 'scrollTo'"
 - error-code：document.documentElement.scrollTo(0,0)
 - fix：`edge` 不支持 `DOM scrollTo`
 
 - error：ios 下拉刷新
 - fix：`document.documentElement.scrollTop` => `document.body.scrollTop`
-```
 
-## Project setup
+## Project
 
 ```
+# install dependencies
 yarn install
-```
 
-### Compiles and hot-reloads for development
-
-```
+# Compiles and hot-reloads for development
 yarn run serve
-```
 
-### Compiles and minifies for production
-
-```
-yarn run build
-```
-
-### Lints and fixes files
-
-```
+# Lints and fixes files
 yarn run lint
 ```
