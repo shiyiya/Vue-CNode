@@ -30,7 +30,7 @@
           <router-link class="nav-page" :to="{path:this.$store.state.loginname?(user.page+'/'+this.$store.state.loginname):'/login'}">{{user.name}}</router-link>
         </li>
         <li v-if="loginname" v-for="page of userpages" :key="page.page">
-          <router-link class="nav-page" :to="{path:`${page.page}/${page.params}`}">{{page.name}}</router-link>
+          <router-link class="nav-page" :to="{path:`${page.page}/${page.params}`}">{{page.name}}{{ messageCount}}</router-link>
         </li>
       </ul>
     </div>
@@ -43,6 +43,7 @@ export default {
     return {
       aside: false,
       loginname: "",
+      messageCount: 0,
       tabs: [
         { tab: "all", name: "全部" },
         { tab: "good", name: "精华" },
@@ -62,6 +63,8 @@ export default {
   },
   mounted() {
     this.loginname = this.$store.state.loginname;
+    this.messageCount = this.$store.state.messageCount;
+    console.log(this.loginname);
     //template for 获取不到正确的 this
   },
   methods: {

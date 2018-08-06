@@ -2,7 +2,7 @@ import Vue from "vue";
 import App from "./App.vue";
 import router from "./router";
 import message from "./util/message";
-import store from "./store/login";
+import store from "./store/";
 import "./app.css";
 
 Vue.config.productionTip = false;

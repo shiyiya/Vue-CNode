@@ -4,7 +4,8 @@ import Vuex from "vuex";
 Vue.use(Vuex);
 const login = new Vuex.Store({
   state: {
-    loginname: ""
+    loginname: "",
+    messageCount: 0
   },
   getters: {
     getLoginname(state) {
@@ -14,6 +15,9 @@ const login = new Vuex.Store({
   mutations: {
     setLoginname(state, loginname) {
       state.loginname = loginname;
+    },
+    setMessageCount(state, data) {
+      state.messageCount = data;
     }
   }
 });

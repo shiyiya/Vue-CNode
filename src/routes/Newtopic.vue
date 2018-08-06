@@ -35,6 +35,16 @@ export default {
       tabshow: false
     };
   },
+  mounted() {
+    if (this.$route.params.id) {
+      this.id = this.$route.params.id;
+      this.title = this.$route.params.title;
+      this.select = this.$route.params.tab;
+      this.content = this.$route.params.content;
+    }
+
+    console.log(this.$route.params);
+  },
   methods: {
     toggleshow() {
       this.tabshow = !this.tabshow;
@@ -47,6 +57,26 @@ export default {
       if (this.title.length < 10 || !this.content) {
         this.$message("内容不当");
         return false;
+      }
+      if (this.$route.params.id) {
+        console.log("update topic");
+        console.log(this.id, this.title, this.select, this.content);
+        axios
+          .post("https://cnodejs.org/api/v1/topics/update", {
+            accesstoken: localStorage.token,
+            topic_id: this.id,
+            title: this.title,
+            tab: this.select,
+            content: marked(this.content)
+          })
+          .then(_ => {
+            _.success &&
+              this.$route.push({
+                name: "topic",
+                params: { id: _.topic_id }
+              });
+          });
+        return;
       }
       axios
         .post("https://cnodejs.org/api/v1/topics/", {
@@ -89,6 +119,8 @@ export default {
 textarea {
   width: 100%;
   height: 300px;
+  line-height: 1.5;
+  font-size: 16px;
 }
 #selectList {
   position: absolute;

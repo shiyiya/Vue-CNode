@@ -14,6 +14,8 @@
           <span v-show="topic.good">good</span>
           <span v-show="topic.top">top</span>
         </li>
+        <li <!-- v-if="topic.author.loginname==getLoginnanme" -->><router-link :to="{name:'newtopic',params:{title:topic.title,tab:topic.tab,content:topic.content,id:topic.id}}">编辑</router-link></li>
+        <li @click="toogleCollect" v-text="isCollect ? '已收藏' : '收藏'"></li>
       </ul>
       <section v-html="topic.content" class="topic-content" />
 
@@ -41,24 +43,34 @@ export default {
   name: "topic",
   data() {
     return {
+      loginname: "",
       isLoading: true,
+      isCollect: false,
       topicId: "",
       topic: {},
       newReply: ""
     };
   },
+
   mounted() {
     this.isLoading = true;
+    this.loginname = localStorage.loginname;
     window.scrollTo(0, 0);
     this.topicId = this.$route.params.id;
     axios
       .get(`https://cnodejs.org/api/v1/topic/${this.topicId}`)
       .then(res => {
         this.topic = res.data.data;
+        this.isCollect = res.data.data.is_collect;
         console.log(this.topic);
         this.isLoading = false;
       })
       .catch(error => this.$message("出错了"));
+  },
+  computed: {
+    getLoginnanme() {
+      return this.$store.state.loginname;
+    }
   },
   methods: {
     reply() {
@@ -79,6 +91,22 @@ export default {
         })
         .catch(() => {
           this.$message("出错了");
+        });
+    },
+    toogleCollect() {
+      console.log(this.topicId);
+      let api = this.isCollect ? "de_collect" : "collect";
+      axios
+        .post(`https://cnodejs.org/api/v1/topic_collect/${api}`, {
+          accesstoken: localStorage.token,
+          topic_id: this.topicId
+        })
+        .then(_ => {
+          if (_.data.success) {
+            this.isCollect = !this.isCollect;
+            this.$message(this.isCollect ? "已收藏" : "已取消收藏");
+          }
+          console.log(_);
         });
     }
   },
