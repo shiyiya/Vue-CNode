@@ -15,13 +15,13 @@
         <article v-for="reply in user.recent_replies" :key="reply.id">
           <list :data="reply"></list>
         </article>
-        <h2 v-if="user.recent_replies.length==0">暂无数据</h2>
+        <h2 v-if="user.recent_replies && user.recent_replies.length==0">暂无数据</h2>
       </div>
       <div :class="{currentContent:currentTab == 'recent_topics'}" class="trends">
         <article v-for="reply in user.recent_topics" :key="reply.id">
           <list :data="reply"></list>
         </article>
-        <h2 v-if="user.recent_topics.length==0">暂无数据</h2>
+        <h2 v-if="user.recent_topics && user.recent_topics.length==0">暂无数据</h2>
       </div>
     </section>
   </div>

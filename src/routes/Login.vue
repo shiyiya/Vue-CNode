@@ -1,7 +1,8 @@
 <template>
   <div id="login-page">
-    <input type="text" placeholder="在此填入你的Access Token" v-model="token" maxlength="36" required />
+    <input type="text" placeholder="在此填入你的Access Token" v-model="token" maxlength="36" required>
     <button @click="login" type="button">登陆</button>
+    <a href="https://cnodejs.org/api#footer" target="_blank">How to get access token ?</a>
   </div>
 </template>
 <script>
@@ -15,6 +16,7 @@ export default {
   },
   mounted() {
     this.$message("请登录！");
+    document.body.scrollTop = document.documentElement.scrollTop = 0;
   },
   methods: {
     login() {
@@ -38,7 +40,8 @@ export default {
             });
           }
         })
-        .catch(() => {
+        .catch((e) => {
+          console.log(e)
           this.$message("请检查你的token是否正确");
         });
     }
@@ -51,6 +54,7 @@ export default {
   height: 50%;
   overflow: auto;
   margin: auto;
+  text-align: center;
 }
 #login-page input,
 button {

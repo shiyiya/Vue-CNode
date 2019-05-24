@@ -11,15 +11,17 @@ import axios from "axios";
 export default {
   name: "app",
   mounted() {
-    axios
-      .get("https://cnodejs.org/api/v1/message/count", {
-        params: {
-          accesstoken: localStorage.token
-        }
-      })
-      .then(_ => {
-        _.success && this.$store.commit("setMessageCount", _.data.data);
-      });
+    if (this.$store.state.loginname) {
+      axios
+        .get("https://cnodejs.org/api/v1/message/count", {
+          params: {
+            accesstoken: localStorage.token
+          }
+        })
+        .then(_ => {
+          _.success && this.$store.commit("setMessageCount", _.data.data);
+        });
+    }
   },
   components: {
     AppHeader

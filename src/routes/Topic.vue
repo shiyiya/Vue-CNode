@@ -4,31 +4,37 @@
     <article class="topic markdown-body">
       <h2 class="topic-title" v-text="topic.title"></h2>
       <ul class="topic-meta">
-        <!--  <router-link :to="{name:'user',params:{id:topic.author_id}}">
-        {{topic.author.loginname}}
-      </router-link> -->
-        <li v-text="topic.create_at" />
+        <router-link
+          :to="{name:'user',params:{ id: topic.author && topic.author.loginname }}"
+        >{{ topic.author && topic.author.loginname }}</router-link>
+        <li v-text="topic.create_at"/>
         <li>浏览量：{{topic.visit_count}}</li>
         <li>分类：{{topic.tab}}</li>
         <li class="tag">
           <span v-show="topic.good">good</span>
           <span v-show="topic.top">top</span>
         </li>
-        <li <!-- v-if="topic.author.loginname==getLoginnanme" -->><router-link :to="{name:'newtopic',params:{title:topic.title,tab:topic.tab,content:topic.content,id:topic.id}}">编辑</router-link></li>
-        <li @click="toogleCollect" v-text="isCollect ? '已收藏' : '收藏'"></li>
+        <li v-if="topic.author && topic.author.loginname == getLoginnanme">
+          <router-link
+            :to="{name:'newtopic',params:{title:topic.title,tab:topic.tab,content:topic.content,id:topic.id}}"
+          >编辑</router-link>
+        </li>
+        <a href="javascript:void(0)" @click="toogleCollect" v-text="isCollect ? '已收藏' : '收藏'"></a>
       </ul>
-      <section v-html="topic.content" class="topic-content" />
-
+      <section v-html="topic.content" class="topic-content"/>
     </article>
-    <h2 class="repliy-title">已有{{topic.reply_count}}条评论</h2>
-    <section v-for="reply in topic.replies" :key="reply.id">
-      <list :data="reply" listType='reply'></list>
-    </section>
-    <div id="comment">
-      <h2 class="repliy-title">回复主题</h2>
-      <textarea v-model="newReply" />
-      <br/>
-      <button type="button" @click="reply">回复</button>
+
+    <div class="replies">
+      <h2 class="repliy-title">已有{{topic.reply_count}}条评论</h2>
+      <section v-for="reply in topic.replies" :key="reply.id">
+        <list :data="reply" listType="reply"></list>
+      </section>
+      <div id="comment" v-if="!isLoading">
+        <h2 class="repliy-title">回复主题</h2>
+        <textarea v-model="newReply"/>
+        <br>
+        <button type="button" @click="reply">回复</button>
+      </div>
     </div>
   </div>
 </template>
@@ -65,7 +71,7 @@ export default {
         console.log(this.topic);
         this.isLoading = false;
       })
-      .catch(error => this.$message("出错了"));
+      .catch(() => this.$message("出错了"));
   },
   computed: {
     getLoginnanme() {
@@ -74,6 +80,10 @@ export default {
   },
   methods: {
     reply() {
+      if (!this.$store.state.loginname) {
+        this.$message("请登录");
+        return;
+      }
       if (this.newReply === "") {
         this.$message("写点什么吧");
         return false;
@@ -94,6 +104,10 @@ export default {
         });
     },
     toogleCollect() {
+      if (!this.$store.state.loginname) {
+        this.$message("请登录");
+        return;
+      }
       console.log(this.topicId);
       let api = this.isCollect ? "de_collect" : "collect";
       axios
@@ -143,6 +157,18 @@ export default {
   padding-bottom: 0.3em;
   font-size: 1.5em;
   border-bottom: 1px solid #eaecef;
+}
+.replies {
+  min-width: 200px;
+  max-width: 980px;
+  padding: 45px;
+  margin: 0 auto;
+}
+
+@media screen and (max-width: 900px) {
+  .replies {
+    padding: 0px;
+  }
 }
 #comment {
   padding-top: 2em;

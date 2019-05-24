@@ -6,32 +6,59 @@
       <aside class="mobile-bar" :class="{ show: aside }">
         <ul>
           <li v-for="tab of tabs" :key="tab.tab">
-            <router-link @click.native="toggleAside" :class="getAvtiveTab(tab.tab) ? 'active':''" exact :to="{path:'/',query: {tab:tab.tab}}">{{tab.name}}</router-link>
+            <router-link
+              @click.native="toggleAside"
+              :class="getAvtiveTab(tab.tab) ? 'active':''"
+              exact
+              :to="{path:'/',query: {tab:tab.tab}}"
+            >{{tab.name}}</router-link>
           </li>
           <li>
-            <router-link @click.native="toggleAside" class="nav-page" :to="{path:this.$store.state.loginname?(user.page+'/'+this.$store.state.loginname):'/login'}">{{user.name}}</router-link>
+            <router-link
+              @click.native="toggleAside"
+              class="nav-page"
+              :to="{path:this.$store.state.loginname?(user.page+'/'+this.$store.state.loginname):'/login'}"
+            >{{user.name}}</router-link>
           </li>
-          <li v-if="loginname" v-for="page of userpages" :key="page.page">
-            <router-link @click.native="toggleAside" class="nav-page" :to="`${page.page}/${page.params}`">{{page.name}}</router-link>
-          </li>
+          <template v-if="loginname">
+            <li v-for="page of userpages" :key="page.page">
+              <router-link
+                @click.native="toggleAside"
+                class="nav-page"
+                :to="`${page.page}/${page.params}`"
+              >{{page.name}}</router-link>
+            </li>
+          </template>
         </ul>
       </aside>
     </header>
     <div id="header">
       <router-link id="logo" :to="{path:'/'}">
-        <img src="../assets/logo.png" />
+        <img src="../assets/logo.png">
       </router-link>
       <span>Vue-CNode</span>
       <ul id="nav">
         <li v-for="tab of tabs" :key="tab.tab">
-          <router-link :class="getAvtiveTab(tab.tab) ? 'active':''" exact :to="{path:'/',query: {tab:tab.tab}}">{{tab.name}}</router-link>
+          <router-link
+            :class="getAvtiveTab(tab.tab) ? 'active':''"
+            exact
+            :to="{path:'/',query: {tab:tab.tab}}"
+          >{{tab.name}}</router-link>
         </li>
         <li>
-          <router-link class="nav-page" :to="{path:this.$store.state.loginname?(user.page+'/'+this.$store.state.loginname):'/login'}">{{user.name}}</router-link>
+          <router-link
+            class="nav-page"
+            :to="{path:this.$store.state.loginname?(user.page+'/'+this.$store.state.loginname):'/login'}"
+          >{{user.name}}</router-link>
         </li>
-        <li v-if="loginname" v-for="page of userpages" :key="page.page">
-          <router-link class="nav-page" :to="{path:`${page.page}/${page.params}`}">{{page.name}}{{ messageCount}}</router-link>
-        </li>
+        <template v-if="loginname">
+          <li v-for="page of userpages" :key="page.page">
+            <router-link
+              class="nav-page"
+              :to="{path:`${page.page}/${page.params}`}"
+            >{{page.name}}{{ messageCount}}</router-link>
+          </li>
+        </template>
       </ul>
     </div>
   </div>
@@ -120,7 +147,13 @@ export default {
   padding: 0;
   margin: 0;
 }
-.mobile-bar li {
+
+.mobile-bar ul li:nth-child(1) {
+ border-top: #42b983 2px solid;
+}
+
+.mobile-bar li,
+.mobile-bar ul li:nth-child(1) {
   background-color: #fff;
   border-bottom: #42b983 2px solid;
   color: #34495e;
